@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Антон Пинчуков](https://up.htmlacademy.ru/javascript/20/user/1009395).
-* Наставник: `Неизвестно`.
+* Наставник: [Иван Патрицкий](https://htmlacademy.ru/profile/id1218325).
 
 ---
 
