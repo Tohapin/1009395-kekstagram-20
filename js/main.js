@@ -190,19 +190,19 @@ uploadClose.addEventListener('keydown', function (evt) {
 
 var pinEffectLevel = document.querySelector('.effect-level__pin');
 var radioEffect = document.getElementsByName('effect');
-var valueEffectLevel = 0;
+var effectLevelProportion = 0;
 var effect = 'none';
 
 var effectLevelValue = document.querySelector('.effect-level__value');
 
 // получение пропорции уровня эффекта и запись ее в input
 var gettingValueEffect = function (evt) {
-  valueEffectLevel = evt.target.offsetLeft / evt.target.parentNode.offsetWidth;
+  effectLevelProportion = evt.target.offsetLeft / evt.target.parentNode.offsetWidth;
 };
 
 // обнуление эффекта при переключении и получение его названия
 var gettingValueRadioEffect = function (evt) {
-  valueEffectLevel = 0;
+  effectLevelProportion = 0;
   effectLevelValue.value = 0;
   effect = evt.target.value;
 };
@@ -213,7 +213,7 @@ for (var i = 0; i < radioEffect.length; i++) {
   radioEffect[i].addEventListener('change', gettingValueRadioEffect);
 }
 
-effectLevelValue.value = Math.round(valueEffectLevel * 100) + ' ' + effect;
+effectLevelValue.value = Math.round(effectLevelProportion * 100) + ' ' + effect;
 
 var hashtag = document.querySelector('.text__hashtags');
 
