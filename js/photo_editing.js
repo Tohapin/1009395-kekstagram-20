@@ -4,10 +4,13 @@
   // получение уровня эффекта
   var pinEffectLevel = document.querySelector('.effect-level__pin');
   var radioEffect = document.getElementsByName('effect');
+  var textDescription = document.querySelector('.text__description');
   var effectLevelProportion = 0;
   var effect = 'none';
 
   var effectLevelValue = document.querySelector('.effect-level__value');
+
+  window.main.arrayImportantElements.push(textDescription);
 
   // получение пропорции уровня эффекта и запись ее в input
   var gettingValueEffect = function (evt) {

@@ -13,10 +13,9 @@
 
     return integer;
   };
-  // функция для закрытия любого окна, для корого она вызвана
+
   var closePopup = function (popup, btnClose) {
     var onPopupEscPress = function (evt) {
-      // проверка нажатия кнопки escape и наличие в массивеактивного элемента
       var elementСheck = window.main.arrayImportantElements.map(function (e) {
         if (e === document.activeElement) {
           return true;
