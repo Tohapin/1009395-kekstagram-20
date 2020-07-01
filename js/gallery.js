@@ -73,7 +73,7 @@
   document.querySelector('.comments-loader').classList.add('hidden');
   document.querySelector('body').classList.add('modal-open');
 
-  window.filling = {
+  window.gallery = {
     fillingBigPicture: fillingBigPicture,
     containerBigPicture: containerBigPicture
   };

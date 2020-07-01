@@ -3,20 +3,20 @@
 // просмотр любой фотографии в полноэкранном режиме
 (function () {
   var pictures = document.querySelectorAll('.picture');
-  var btnClosePopupPhoto = window.filling.containerBigPicture.querySelector('.big-picture__cancel');
+  var btnClosePopupPhoto = window.gallery.containerBigPicture.querySelector('.big-picture__cancel');
 
   var openPopup = function (picture) {
     var indexPhoto = window.mock.arrayPhoto.map(function (e) {
       return e.url;
     }).indexOf(picture.querySelector('img').getAttribute('src'));
 
-    window.filling.containerBigPicture.classList.remove('hidden');
-    window.filling.fillingBigPicture(window.mock.arrayPhoto[indexPhoto]);
+    window.gallery.containerBigPicture.classList.remove('hidden');
+    window.gallery.fillingBigPicture(window.mock.arrayPhoto[indexPhoto]);
 
-    var textDescription = window.filling.containerBigPicture.querySelector('.social__footer-text');
+    var textDescription = window.gallery.containerBigPicture.querySelector('.social__footer-text');
     // добавляет элемент в массив для отслеживания
     window.main.arrayImportantElements.push(textDescription);
-    window.main.closePopup(window.filling.containerBigPicture, btnClosePopupPhoto);
+    window.main.closePopup(window.gallery.containerBigPicture, btnClosePopupPhoto);
   };
 
   var onPictureClick = function (evt) {
