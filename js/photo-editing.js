@@ -24,23 +24,21 @@
   levelEffect.classList.add('hidden');
 
   var applicationEffect = function (Effect, effectLevel) {
-    var img = document.querySelector('.img-upload__preview');
+    var img = document.querySelector('.img-upload__preview').children[0];
     img.style.filter = arrayEffects[Effect][0] + '(' + arrayEffects[Effect][1] * effectLevel + arrayEffects[Effect][2] + ')';
   };
 
-  // получение пропорции уровня эффекта и запись ее в input
   var gettingValueEffect = function (pin) {
     effectLevelProportion = (pin.offsetLeft / pin.parentNode.offsetWidth) * 100;
     effectLevelValue.value = Math.round(effectLevelProportion);
     return Math.round(effectLevelProportion) / 100;
   };
 
-  // обнуление эффекта при переключении и получение его названия
   var gettingValueRadioEffect = function (evt) {
-    effectLevelProportion = 0;
-    effectLevelValue.value = 0;
-    pinEffectLevel.style.left = 0;
-    depthEffectLevel.style.width = 0;
+    pinEffectLevel.style.left = 100 + '%';
+    depthEffectLevel.style.width = 100 + '%';
+    effectLevelProportion = (pinEffectLevel.offsetLeft / pinEffectLevel.parentNode.offsetWidth) * 100;
+    effectLevelValue.value = Math.round(effectLevelProportion);
 
     if (evt.target.value === 'none') {
       levelEffect.classList.add('hidden');
@@ -48,7 +46,7 @@
     } else {
       levelEffect.classList.remove('hidden');
       pinEffectLevel.addEventListener('mousedown', onPinMove);
-      applicationEffect(evt.target.value, 0);
+      applicationEffect(evt.target.value, gettingValueEffect(pinEffectLevel));
       nameEffect = evt.target.value;
     }
   };
@@ -59,7 +57,7 @@
       y: evt.clientY
     };
 
-    var onMauseMove = function (moveEvt) {
+    var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
 
       var shift = {
@@ -82,11 +80,11 @@
     var onMauseUp = function (upEvt) {
       upEvt.preventDefault();
 
-      document.removeEventListener('mousemove', onMauseMove);
+      document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMauseUp);
     };
 
-    document.addEventListener('mousemove', onMauseMove);
+    document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMauseUp);
   };
 
