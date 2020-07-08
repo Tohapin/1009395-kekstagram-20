@@ -2,31 +2,32 @@
 
 (function () {
   var similarListElement = document.querySelector('.pictures');
-  var similarWizardTemplate = document.querySelector('#picture').content.querySelector('.picture');
+  var similarPhotoTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-  var addWizard = function (mas) {
+  // console.log(window.mock.arrayPhoto);
+  // console.log(window.backend.arrayPhoto);
+
+  var addPhoto = function (mas) {
     var fragment = document.createDocumentFragment();
-
     for (var i = 0; i < mas.length; i++) {
-      var wizardElement = similarWizardTemplate.cloneNode(true);
+      var photoElement = similarPhotoTemplate.cloneNode(true);
 
-      wizardElement.querySelector('.picture__img').src = mas[i].url;
-      wizardElement.querySelector('.picture__likes').textContent = mas[i].likes;
-      wizardElement.querySelector('.picture__comments').textContent = mas[i].comments.length;
+      photoElement.querySelector('.picture__img').src = mas[i].url;
+      photoElement.querySelector('.picture__likes').textContent = mas[i].likes;
+      photoElement.querySelector('.picture__comments').textContent = mas[i].comments.length;
 
-      fragment.appendChild(wizardElement);
+      fragment.appendChild(photoElement);
     }
 
     return fragment;
   };
 
-  similarListElement.appendChild(addWizard(window.mock.arrayPhoto));
+  similarListElement.appendChild(addPhoto(window.mock.arrayPhoto));
 
-  // показ фотографии
   var containerBigPicture = document.querySelector('.big-picture');
 
   var fillingBigPicture = function (photo) {
-
+    // console.log(photo)
     containerBigPicture.querySelector('.big-picture__img').getElementsByTagName('img')[0].src = photo.url;
     containerBigPicture.querySelector('.likes-count').textContent = photo.likes;
     containerBigPicture.querySelector('.comments-count').textContent = photo.comments.length;
@@ -65,10 +66,8 @@
     }
   };
 
-  // показ фотографии по заданию
-  fillingBigPicture(window.mock.arrayPhoto[0]);
+  fillingBigPicture(window.backend.arrayPhoto[0]);
 
-  // скрытые эллементы по заданию
   document.querySelector('.social__comment-count').classList.add('hidden');
   document.querySelector('.comments-loader').classList.add('hidden');
   document.querySelector('body').classList.add('modal-open');

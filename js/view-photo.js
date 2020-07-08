@@ -6,15 +6,14 @@
   var btnClosePopupPhoto = window.gallery.containerBigPicture.querySelector('.big-picture__cancel');
 
   var openPopup = function (picture) {
-    var indexPhoto = window.mock.arrayPhoto.map(function (e) {
+    var indexPhoto = window.backend.arrayPhoto.map(function (e) {
       return e.url;
     }).indexOf(picture.querySelector('img').getAttribute('src'));
 
     window.gallery.containerBigPicture.classList.remove('hidden');
-    window.gallery.fillingBigPicture(window.mock.arrayPhoto[indexPhoto]);
+    window.gallery.fillingBigPicture(window.backend.arrayPhoto[indexPhoto]);
 
     var textDescription = window.gallery.containerBigPicture.querySelector('.social__footer-text');
-    // добавляет элемент в массив для отслеживания
     window.main.arrayImportantElements.push(textDescription);
     window.main.closePopup(window.gallery.containerBigPicture, btnClosePopupPhoto);
   };
