@@ -2,8 +2,18 @@
 
 // просмотр любой фотографии в полноэкранном режиме
 (function () {
-  var pictures = document.querySelectorAll('.picture');
-  var btnClosePopupPhoto = window.gallery.containerBigPicture.querySelector('.big-picture__cancel');
+  var pictures = '';
+  var btnClosePopupPhoto = '';
+
+  var makeViewPhoto = function () {
+    pictures = document.querySelectorAll('.picture');
+    btnClosePopupPhoto = window.gallery.containerBigPicture.querySelector('.big-picture__cancel');
+
+    for (var i = 0; i < pictures.length; i++) {
+      pictures[i].addEventListener('click', onPictureClick);
+      pictures[i].addEventListener('keydown', onPictureEnter);
+    }
+  };
 
   var openPopup = function (picture) {
     var indexPhoto = window.backend.arrayPhoto.map(function (e) {
@@ -28,8 +38,7 @@
     }
   };
 
-  for (var i = 0; i < pictures.length; i++) {
-    pictures[i].addEventListener('click', onPictureClick);
-    pictures[i].addEventListener('keydown', onPictureEnter);
-  }
+  window.viewPhoto = {
+    makeViewPhoto: makeViewPhoto
+  };
 })();

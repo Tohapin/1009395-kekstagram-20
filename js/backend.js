@@ -32,24 +32,29 @@
   var onLoad = function (data) {
     for (var i = 0; i < data.length; i++) {
       arrayPhoto[i] = data[i];
-      // console.log(data[i])
-      // console.log(arrayPhoto[i])
     }
-    console.log(arrayPhoto[1])
-    console.log(arrayPhoto.length);
-  }
-  // console.log(arrayPhoto);
-  // console.log(arrayPhoto[0])
-  // console.log(arrayPhoto.length);
+    window.gallery.addPhoto(arrayPhoto);
+  };
 
   var onError = function (message) {
-    console.log(message);
-  }
+    var containerPictures = document.querySelector('.pictures.container');
+    var div = document.createElement('div');
+    div.classList.add('error');
+
+    var divInner = document.createElement('div');
+    divInner.classList.add('error__inner');
+
+    var errorTitle = document.createElement('h2');
+    errorTitle.classList.add('error__title');
+    errorTitle.innerHTML = message;
+
+    containerPictures.appendChild(div);
+    div.appendChild(divInner);
+    divInner.appendChild(errorTitle);
+  };
 
   load(onLoad, onError);
-  console.log(arrayPhoto[1])
-  console.log(arrayPhoto.length);
-  // console.log(arrayPhoto);
+
   window.backend = {
     arrayPhoto: arrayPhoto
   };
