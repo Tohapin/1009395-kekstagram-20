@@ -77,15 +77,15 @@
       }
     };
 
-    var onMauseUp = function (upEvt) {
+    var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
 
       document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMauseUp);
+      document.removeEventListener('mouseup', onMouseUp);
     };
 
     document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMauseUp);
+    document.addEventListener('mouseup', onMouseUp);
   };
 
   for (var i = 0; i < radioEffect.length; i++) {
