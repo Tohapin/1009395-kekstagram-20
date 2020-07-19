@@ -29,7 +29,6 @@
   var resetData = function () {
     form.reset();
     window.photoEditing.defaultValueEffect();
-    window.gallery.defaultLogo();
     window.uploadPhoto.uploadPopup.classList.add('hidden');
   };
 
