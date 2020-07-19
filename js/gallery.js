@@ -61,7 +61,9 @@
     }
   };
 
-  // fillingBigPicture(window.mock.arrayPhoto[0]);
+  var defaultLogo = function () {
+    document.querySelector('.img-upload__label').classList.add('visually-hidden');
+  };
 
   document.querySelector('.social__comment-count').classList.add('hidden');
   document.querySelector('.comments-loader').classList.add('hidden');
@@ -70,6 +72,7 @@
   window.gallery = {
     addPhoto: addPhoto,
     fillingBigPicture: fillingBigPicture,
-    containerBigPicture: containerBigPicture
+    containerBigPicture: containerBigPicture,
+    defaultLogo: defaultLogo
   };
 })();
