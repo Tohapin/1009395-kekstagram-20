@@ -1,16 +1,15 @@
 'use strict';
 
 (function () {
-  // загрузка фотографии
-
   var uploadOpen = document.querySelector('#upload-file');
   var uploadPopup = document.querySelector('.img-upload__overlay');
   var uploadClose = uploadPopup.querySelector('.img-upload__cancel');
+  var form = document.querySelector('.img-upload__form');
 
   var openPopup = function () {
     uploadPopup.classList.remove('hidden');
 
-    window.main.closePopup(uploadPopup, uploadClose);
+    window.main.closePopup(uploadPopup, uploadClose, form);
   };
 
   uploadOpen.addEventListener('change', function () {
@@ -22,4 +21,8 @@
       openPopup();
     }
   });
+
+  window.uploadPhoto = {
+    uploadPopup: uploadPopup
+  };
 })();

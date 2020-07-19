@@ -14,7 +14,7 @@
     return integer;
   };
 
-  var closePopup = function (popup, btnClose) {
+  var closePopup = function (popup, btnClose, form) {
     var onPopupEscPress = function (evt) {
       var elementСheck = window.main.arrayImportantElements.map(function (e) {
         if (e === document.activeElement) {
@@ -36,7 +36,18 @@
       }
     };
 
+    var onOutsidePopupClick = function (evt) {
+      if (evt.target === popup) {
+        closeThisPopup();
+      }
+    };
+
     var closeThisPopup = function () {
+      if (form) {
+        form.reset();
+        window.photoEditing.defaultValueEffect();
+      }
+
       popup.classList.add('hidden');
 
       document.removeEventListener('keydown', onPopupEscPress);
@@ -49,6 +60,7 @@
 
     btnClose.addEventListener('keydown', onPopupEnterPress);
     document.addEventListener('keydown', onPopupEscPress);
+    document.addEventListener('click', onOutsidePopupClick);
   };
 
   window.main = {

@@ -11,7 +11,7 @@
   var effectLevelProportion = 0;
   var nameEffect = 'none';
   var arrayEffects = {
-    'none': ['', '', ''],
+    'none': ['none', '', ''],
     'chrome': ['grayscale', '1', ''],
     'sepia': ['sepia', '1', ''],
     'marvin': ['invert', '100', '%'],
@@ -25,7 +25,11 @@
 
   var applicationEffect = function (Effect, effectLevel) {
     var img = document.querySelector('.img-upload__preview').children[0];
-    img.style.filter = arrayEffects[Effect][0] + '(' + arrayEffects[Effect][1] * effectLevel + arrayEffects[Effect][2] + ')';
+    if (Effect !== 'none') {
+      img.style.filter = arrayEffects[Effect][0] + '(' + arrayEffects[Effect][1] * effectLevel + arrayEffects[Effect][2] + ')';
+    } else {
+      img.style.filter = arrayEffects[Effect][0];
+    }
   };
 
   var gettingValueEffect = function (pin) {
@@ -43,6 +47,7 @@
     if (evt.target.value === 'none') {
       levelEffect.classList.add('hidden');
       pinEffectLevel.removeEventListener('mousedown', onPinMove);
+      applicationEffect(evt.target.value, '');
     } else {
       levelEffect.classList.remove('hidden');
       pinEffectLevel.addEventListener('mousedown', onPinMove);
@@ -88,6 +93,14 @@
     document.addEventListener('mouseup', onMouseUp);
   };
 
+  var defaultValueEffect = function () {
+    effectLevelValue.value = 100;
+    pinEffectLevel.style.left = document.querySelector('.effect-level__line').offsetWidth + 'px';
+    depthEffectLevel.style.width = document.querySelector('.effect-level__line').offsetWidth + 'px';
+    applicationEffect('none', '');
+    levelEffect.classList.add('hidden');
+  };
+
   for (var i = 0; i < radioEffect.length; i++) {
     radioEffect[i].addEventListener('change', gettingValueRadioEffect);
   }
@@ -113,4 +126,8 @@
   };
 
   hashtag.addEventListener('change', hashtagCheck);
+
+  window.photoEditing = {
+    defaultValueEffect: defaultValueEffect
+  };
 })();
