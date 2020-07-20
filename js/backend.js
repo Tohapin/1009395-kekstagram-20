@@ -30,6 +30,7 @@
   };
 
   var onLoad = function (data) {
+    window.gallery.showFilters();
     for (var i = 0; i < data.length; i++) {
       arrayPhoto[i] = data[i];
     }

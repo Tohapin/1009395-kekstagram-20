@@ -1,18 +1,32 @@
 'use strict';
 
 (function () {
-  // массив, в который можно поместить элементы для отслеживания, чтобы окно не закрывалось при активном состоянии элементов
-  var arrayImportantElements = [];
+  var DEBOUNCE_INTERVAL = 500;
+  var arrayImportantElements = []; // массив, в который можно поместить элементы для отслеживания, чтобы окно не закрывалось при активном состоянии элементов
 
-  var randomInteger = function (min, max) {
+  var randomInteger = function (min, max, exclusion) {
     var integer = Math.round(Math.random() * 10);
 
-    while (integer >= max || min >= integer) {
-      integer = Math.round(Math.random() * 100);
+    if (exclusion) {
+      while ((integer >= max || min >= integer) || exclusion.includes(integer)) {
+        integer = Math.round(Math.random() * 100);
+      }
+    } else {
+      while (integer >= max || min >= integer) {
+        integer = Math.round(Math.random() * 100);
+      }
     }
-
     return integer;
   };
+
+  var debounce = function (cb) {
+    var lastTimeout = null;
+
+    lastTimeout = window.setTimeout(function() {
+      cb();
+    }, DEBOUNCE_INTERVAL);
+  };
+
 
   var closePopup = function (popup, btnClose, form) {
     var onPopupEscPress = function (evt) {
@@ -66,6 +80,7 @@
   window.main = {
     randomInteger: randomInteger,
     arrayImportantElements: arrayImportantElements,
-    closePopup: closePopup
+    closePopup: closePopup,
+    debounce: debounce
   };
 })();
