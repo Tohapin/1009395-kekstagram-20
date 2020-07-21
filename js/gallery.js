@@ -7,7 +7,7 @@
   var removePhoto = function () {
     var renderedPhotos = document.querySelectorAll('.picture');
 
-    for(var i = 0; i < renderedPhotos.length; i++){
+    for (var i = 0; i < renderedPhotos.length; i++) {
       renderedPhotos[i].remove();
     }
   };
@@ -96,7 +96,7 @@
     var randomPhotos = [];
     var exclusion = [];
 
-    for(var i = 0; i < window.backend.arrayPhoto.length && i < 10; i++){
+    for (var i = 0; i < window.backend.arrayPhoto.length && i < 10; i++) {
       var randomInt = window.main.randomInteger(0, window.backend.arrayPhoto.length, exclusion);
       exclusion.push(randomInt);
       randomPhotos[i] = window.backend.arrayPhoto[randomInt];
@@ -115,7 +115,7 @@
     var filters = document.querySelector('.img-filters');
     var buttons = filters.querySelectorAll('button');
 
-    for(var i = 0; i < buttons.length; i++){
+    for (var i = 0; i < buttons.length; i++) {
       buttons[i].classList.remove('img-filters__button--active');
     }
   };
