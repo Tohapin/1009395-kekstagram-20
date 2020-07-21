@@ -74,6 +74,7 @@
 
       document.removeEventListener('keydown', onPopupEscPress);
       btnClose.removeEventListener('keydown', onPopupEscPress);
+      document.querySelector('body').classList.remove('modal-open');
     };
 
     btnClose.addEventListener('click', function () {
