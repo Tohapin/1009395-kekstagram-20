@@ -50,6 +50,7 @@
       applicationEffect(evt.target.value, '');
     } else {
       levelEffect.classList.remove('hidden');
+      document.querySelector('body').classList.add('modal-open');
       pinEffectLevel.addEventListener('mousedown', onPinMove);
       applicationEffect(evt.target.value, gettingValueEffect(pinEffectLevel));
       nameEffect = evt.target.value;

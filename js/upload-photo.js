@@ -8,6 +8,7 @@
 
   var openPopup = function () {
     uploadPopup.classList.remove('hidden');
+    document.querySelector('body').classList.add('modal-open');
 
     window.main.closePopup(uploadPopup, uploadClose, form);
   };
