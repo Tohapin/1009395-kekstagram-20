@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  // получение уровня эффекта
   var pinEffectLevel = document.querySelector('.effect-level__pin');
   var depthEffectLevel = document.querySelector('.effect-level__depth');
   var radioEffect = document.getElementsByName('effect');
@@ -15,9 +14,50 @@
     'chrome': ['grayscale', '1', ''],
     'sepia': ['sepia', '1', ''],
     'marvin': ['invert', '100', '%'],
-    'phobos': ['blur', '10', 'px'],
+    'phobos': ['blur', '3', 'px'],
     'heat': ['brightness', '3', '']
   };
+  var scaleControls = document.querySelector('.scale');
+  var scaleControlSmaller = scaleControls.querySelector('.scale__control--smaller');
+  var scaleControlValue = scaleControls.querySelector('.scale__control--value');
+  var scaleControlBigger = scaleControls.querySelector('.scale__control--bigger');
+
+  var applicationScale = function (value) {
+    window.image.preview.style.transform = 'scale(' + (value / 100) + ')';
+  };
+
+  var onScaleControlSmallerClick = function () {
+    var scaleValue = scaleControlValue.value.slice(0, -1);
+
+    if (scaleValue > 25) {
+      if ((scaleValue - 25) < 25) {
+        scaleValue = 25;
+      } else {
+        scaleValue -= 25;
+      }
+    }
+
+    scaleControlValue.value = scaleValue + '%';
+    applicationScale(scaleValue);
+  };
+
+  var onScaleControlBiggerClick = function () {
+    var scaleValue = scaleControlValue.value.slice(0, -1);
+
+    if (scaleValue < 100) {
+      if ((100 - scaleValue) <= 25) {
+        scaleValue = 100;
+      } else {
+        scaleValue = parseInt(scaleValue, 10) + 25;
+      }
+    }
+
+    scaleControlValue.value = scaleValue + '%';
+    applicationScale(scaleValue);
+  };
+
+  scaleControlSmaller.addEventListener('click', onScaleControlSmallerClick);
+  scaleControlBigger.addEventListener('click', onScaleControlBiggerClick);
 
   window.main.arrayImportantElements.push(textDescription);
 
