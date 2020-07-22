@@ -93,6 +93,6 @@
     arrayImportantElements: arrayImportantElements,
     closePopup: closePopup,
     debounce: debounce,
-    StatusCode, StatusCode
+    StatusCode: StatusCode
   };
 })();

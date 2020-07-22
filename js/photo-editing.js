@@ -156,12 +156,12 @@
 
     var onElementEnter = function () {
       element.style.outline = 'none';
-      element.removeEventListener('enter', onElementEnter)
+      element.removeEventListener('enter', onElementEnter);
     };
 
     var onElementClick = function () {
       element.style.outline = 'none';
-      element.removeEventListener('click', onElementClick)
+      element.removeEventListener('click', onElementClick);
     };
 
     element.addEventListener('click', onElementClick);
