@@ -72,14 +72,13 @@
 
       popup.classList.add('hidden');
 
+      btnClose.removeEventListener('click', closeThisPopup);
       document.removeEventListener('keydown', onPopupEscPress);
       btnClose.removeEventListener('keydown', onPopupEscPress);
       document.querySelector('body').classList.remove('modal-open');
     };
 
-    btnClose.addEventListener('click', function () {
-      closeThisPopup();
-    });
+    btnClose.addEventListener('click', closeThisPopup);
 
     btnClose.addEventListener('keydown', onPopupEnterPress);
     document.addEventListener('keydown', onPopupEscPress);

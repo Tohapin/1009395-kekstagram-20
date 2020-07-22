@@ -5,7 +5,7 @@
   var StatusCode = {
     OK: 200
   };
-  var arrayPhoto = [];
+  var photos = [];
 
   var load = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
@@ -32,9 +32,9 @@
   var onLoad = function (data) {
     window.gallery.showFilters();
     for (var i = 0; i < data.length; i++) {
-      arrayPhoto[i] = data[i];
+      photos[i] = data[i];
     }
-    window.gallery.addPhoto(arrayPhoto);
+    window.gallery.addPhoto(photos);
   };
 
   var onError = function (message) {
@@ -57,6 +57,6 @@
   load(onLoad, onError);
 
   window.backend = {
-    arrayPhoto: arrayPhoto
+    photos: photos
   };
 })();
