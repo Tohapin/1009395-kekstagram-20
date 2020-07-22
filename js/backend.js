@@ -2,18 +2,17 @@
 
 (function () {
   var URL_LOAD = 'https://javascript.pages.academy/kekstagram/data';
-  var StatusCode = {
-    OK: 200
-  };
   var photos = [];
 
   var load = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
+
     xhr.responseType = 'json';
     xhr.open('GET', URL_LOAD);
     xhr.send();
+
     xhr.addEventListener('load', function () {
-      if (xhr.status === StatusCode.OK) {
+      if (xhr.status === window.main.StatusCode.OK) {
         onLoad(Array.from(xhr.response));
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
@@ -31,15 +30,18 @@
 
   var onLoad = function (data) {
     window.gallery.showFilters();
+
     for (var i = 0; i < data.length; i++) {
       photos[i] = data[i];
     }
+
     window.gallery.addPhoto(photos);
   };
 
   var onError = function (message) {
     var containerPictures = document.querySelector('.pictures.container');
     var div = document.createElement('div');
+
     div.classList.add('error');
 
     var divInner = document.createElement('div');

@@ -6,7 +6,7 @@
   var uploadClose = uploadPopup.querySelector('.img-upload__cancel');
   var form = document.querySelector('.img-upload__form');
 
-  var openPopup = function () {
+  var open = function () {
     uploadPopup.classList.remove('hidden');
     document.querySelector('body').classList.add('modal-open');
 
@@ -14,12 +14,12 @@
   };
 
   uploadOpen.addEventListener('change', function () {
-    openPopup();
+    open();
   });
 
   uploadOpen.addEventListener('change', function (evt) {
     if (evt.key === 'Enter') {
-      openPopup();
+      open();
     }
   });
 

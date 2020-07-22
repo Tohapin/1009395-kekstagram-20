@@ -2,6 +2,9 @@
 
 (function () {
   var DEBOUNCE_INTERVAL = 500;
+  var StatusCode = {
+    OK: 200
+  };
   var arrayImportantElements = []; // массив, в который можно поместить элементы для отслеживания, чтобы окно не закрывалось при активном состоянии элементов
 
   var randomInteger = function (min, max, exclusion) {
@@ -89,6 +92,7 @@
     randomInteger: randomInteger,
     arrayImportantElements: arrayImportantElements,
     closePopup: closePopup,
-    debounce: debounce
+    debounce: debounce,
+    StatusCode, StatusCode
   };
 })();

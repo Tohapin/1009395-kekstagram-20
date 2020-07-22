@@ -4,9 +4,6 @@
   var URL_SUBMIT = 'https://javascript.pages.academy/kekstagram';
   var form = document.querySelector('.img-upload__form');
   var xhr = new XMLHttpRequest();
-  var StatusCode = {
-    OK: 200
-  };
 
   var onSendForm = function (evt) {
     evt.preventDefault();
@@ -15,7 +12,7 @@
     xhr.send(new FormData(form));
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === StatusCode.OK) {
+      if (xhr.status === window.main.StatusCode.OK) {
         resetData();
         success();
       } else {

@@ -53,11 +53,11 @@
 
   var filterRandom = window.main.debounce(function () {
     var randomPhotos = [];
-    var exclusion = [];
+    var exclusions = [];
 
     for (var i = 0; i < window.backend.photos.length && i < 10; i++) {
-      var randomInt = window.main.randomInteger(0, window.backend.photos.length, exclusion);
-      exclusion.push(randomInt);
+      var randomInt = window.main.randomInteger(0, window.backend.photos.length, exclusions);
+      exclusions.push(randomInt);
       randomPhotos[i] = window.backend.photos[randomInt];
     }
 

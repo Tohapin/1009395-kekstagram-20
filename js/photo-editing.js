@@ -9,7 +9,7 @@
   var textDescription = document.querySelector('.text__description');
   var effectLevelProportion = 0;
   var nameEffect = 'none';
-  var arrayEffects = {
+  var Effects = {
     'none': ['none', '', ''],
     'chrome': ['grayscale', '1', ''],
     'sepia': ['sepia', '1', ''],
@@ -64,9 +64,9 @@
   var applicationEffect = function (Effect, effectLevel) {
     var img = document.querySelector('.img-upload__preview').children[0];
     if (Effect !== 'none') {
-      img.style.filter = arrayEffects[Effect][0] + '(' + arrayEffects[Effect][1] * effectLevel + arrayEffects[Effect][2] + ')';
+      img.style.filter = Effects[Effect][0] + '(' + Effects[Effect][1] * effectLevel + Effects[Effect][2] + ')';
     } else {
-      img.style.filter = arrayEffects[Effect][0];
+      img.style.filter = Effects[Effect][0];
     }
   };
 

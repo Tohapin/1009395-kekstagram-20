@@ -77,7 +77,7 @@
     }
   };
 
-  var openPopup = function (picture) {
+  var open = function (picture) {
     var indexPhoto = window.backend.photos.map(function (e) {
       return e.url;
     }).indexOf(picture.querySelector('img').getAttribute('src'));
@@ -93,12 +93,12 @@
   };
 
   var onPictureClick = function (evt) {
-    openPopup(evt.currentTarget);
+    open(evt.currentTarget);
   };
 
   var onPictureEnter = function (evt) {
     if (evt.key === 'Enter') {
-      openPopup(evt.currentTarget);
+      open(evt.currentTarget);
     }
   };
 
