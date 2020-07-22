@@ -6,20 +6,18 @@
   var uploadClose = uploadPopup.querySelector('.img-upload__cancel');
   var form = document.querySelector('.img-upload__form');
 
-  var open = function () {
+  var onUploadChange = function () {
     uploadPopup.classList.remove('hidden');
     document.querySelector('body').classList.add('modal-open');
 
     window.main.closePopup(uploadPopup, uploadClose, form);
   };
 
-  uploadOpen.addEventListener('change', function () {
-    open();
-  });
+  uploadOpen.addEventListener('change', onUploadChange);
 
   uploadOpen.addEventListener('change', function (evt) {
     if (evt.key === 'Enter') {
-      open();
+      onUploadChange();
     }
   });
 
