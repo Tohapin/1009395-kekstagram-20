@@ -29,7 +29,7 @@
   };
 
   var sortedArrayByComments = function (mas) {
-    var sortMas = mas;
+    var sortMas = mas.slice();
 
     for (var currentIndex = 0; currentIndex <= sortMas.length - 2; currentIndex++) {
       var minValue = sortMas[currentIndex];
@@ -48,17 +48,17 @@
 
   var filterDefault = window.main.debounce(function () {
     removePhoto();
-    addPhoto(window.backend.arrayPhoto);
+    addPhoto(window.backend.photos);
   });
 
   var filterRandom = window.main.debounce(function () {
     var randomPhotos = [];
-    var exclusion = [];
+    var exclusions = [];
 
-    for (var i = 0; i < window.backend.arrayPhoto.length && i < 10; i++) {
-      var randomInt = window.main.randomInteger(0, window.backend.arrayPhoto.length, exclusion);
-      exclusion.push(randomInt);
-      randomPhotos[i] = window.backend.arrayPhoto[randomInt];
+    for (var i = 0; i < window.backend.photos.length && i < 10; i++) {
+      var randomInt = window.main.randomInteger(0, window.backend.photos.length, exclusions);
+      exclusions.push(randomInt);
+      randomPhotos[i] = window.backend.photos[randomInt];
     }
 
     removePhoto();
@@ -67,7 +67,7 @@
 
   var filterDiscussed = window.main.debounce(function () {
     removePhoto();
-    addPhoto(sortedArrayByComments(window.backend.arrayPhoto));
+    addPhoto(sortedArrayByComments(window.backend.photos));
   });
 
   var resetFilters = function () {

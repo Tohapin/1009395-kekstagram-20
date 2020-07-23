@@ -2,6 +2,9 @@
 
 (function () {
   var DEBOUNCE_INTERVAL = 500;
+  var StatusCode = {
+    OK: 200
+  };
   var arrayImportantElements = []; // массив, в который можно поместить элементы для отслеживания, чтобы окно не закрывалось при активном состоянии элементов
 
   var randomInteger = function (min, max, exclusion) {
@@ -72,14 +75,13 @@
 
       popup.classList.add('hidden');
 
+      btnClose.removeEventListener('click', closeThisPopup);
       document.removeEventListener('keydown', onPopupEscPress);
       btnClose.removeEventListener('keydown', onPopupEscPress);
       document.querySelector('body').classList.remove('modal-open');
     };
 
-    btnClose.addEventListener('click', function () {
-      closeThisPopup();
-    });
+    btnClose.addEventListener('click', closeThisPopup);
 
     btnClose.addEventListener('keydown', onPopupEnterPress);
     document.addEventListener('keydown', onPopupEscPress);
@@ -90,6 +92,7 @@
     randomInteger: randomInteger,
     arrayImportantElements: arrayImportantElements,
     closePopup: closePopup,
-    debounce: debounce
+    debounce: debounce,
+    StatusCode: StatusCode
   };
 })();

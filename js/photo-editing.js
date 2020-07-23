@@ -9,7 +9,7 @@
   var textDescription = document.querySelector('.text__description');
   var effectLevelProportion = 0;
   var nameEffect = 'none';
-  var arrayEffects = {
+  var Effects = {
     'none': ['none', '', ''],
     'chrome': ['grayscale', '1', ''],
     'sepia': ['sepia', '1', ''],
@@ -59,16 +59,14 @@
   scaleControlSmaller.addEventListener('click', onScaleControlSmallerClick);
   scaleControlBigger.addEventListener('click', onScaleControlBiggerClick);
 
-  window.main.arrayImportantElements.push(textDescription);
-
   levelEffect.classList.add('hidden');
 
   var applicationEffect = function (Effect, effectLevel) {
     var img = document.querySelector('.img-upload__preview').children[0];
     if (Effect !== 'none') {
-      img.style.filter = arrayEffects[Effect][0] + '(' + arrayEffects[Effect][1] * effectLevel + arrayEffects[Effect][2] + ')';
+      img.style.filter = Effects[Effect][0] + '(' + Effects[Effect][1] * effectLevel + Effects[Effect][2] + ')';
     } else {
-      img.style.filter = arrayEffects[Effect][0];
+      img.style.filter = Effects[Effect][0];
     }
   };
 
@@ -146,27 +144,58 @@
     radioEffect[i].addEventListener('change', gettingValueRadioEffect);
   }
 
+  window.main.arrayImportantElements.push(textDescription);
+
   var hashtag = document.querySelector('.text__hashtags');
   // добавляет элемент в массив для отслеживания
   window.main.arrayImportantElements.push(hashtag);
 
+  var incorrectData = function (element, message) {
+    element.setCustomValidity(message);
+    element.style.outline = '1px solid red';
+
+    var onElementEnter = function () {
+      element.style.outline = 'none';
+      element.removeEventListener('enter', onElementEnter);
+    };
+
+    var onElementClick = function () {
+      element.style.outline = 'none';
+      element.removeEventListener('click', onElementClick);
+    };
+
+    element.addEventListener('click', onElementClick);
+    element.addEventListener('enter', onElementEnter);
+  };
+
   var hashtagCheck = function () {
     var masHashtag = hashtag.value.split(' ');
 
-    if (masHashtag !== '' && masHashtag.length <= 5) {
-      for (var int = 0; int < masHashtag.length; int++) {
-        if (!masHashtag[int].match(/^#[а-яёА-ЯË\w]{1,19}/gi)) {
-          hashtag.setCustomValidity('Не корректный хэштег: ' + masHashtag[i]);
-        } else {
-          hashtag.setCustomValidity('');
+    if (hashtag.value !== '') {
+      if (masHashtag.length <= 5) {
+        for (var int = 0; int < masHashtag.length; int++) {
+          if (!masHashtag[int].match(/^#[а-яёА-ЯË\w]{1,19}/gi)) {
+            incorrectData(hashtag, 'Не корректный хэштег: ' + masHashtag[i]);
+          } else {
+            hashtag.setCustomValidity('');
+          }
         }
+      } else if (masHashtag.length > 5) {
+        incorrectData(hashtag, 'Не больше 5 тегов');
       }
-    } else if (masHashtag.length > 5) {
-      hashtag.setCustomValidity('Не больше 5 тегов');
+    } else {
+      hashtag.setCustomValidity('');
+    }
+  };
+
+  var descriptionCheck = function () {
+    if (textDescription.value.length > 140) {
+      incorrectData(textDescription, 'Не более 140 символов');
     }
   };
 
   hashtag.addEventListener('change', hashtagCheck);
+  textDescription.addEventListener('change', descriptionCheck);
 
   window.photoEditing = {
     defaultValueEffect: defaultValueEffect
