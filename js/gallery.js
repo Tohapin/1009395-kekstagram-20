@@ -14,6 +14,7 @@
 
   var addPhoto = function (mas) {
     var fragment = document.createDocumentFragment();
+
     for (var i = 0; i < mas.length; i++) {
       var photoElement = similarPhotoTemplate.cloneNode(true);
 
