@@ -76,7 +76,7 @@
     return Math.round(effectLevelProportion) / 100;
   };
 
-  var gettingValueRadioEffect = function (evt) {
+  var onGettingValueRadioEffect = function (evt) {
     pinEffectLevel.style.left = 100 + '%';
     depthEffectLevel.style.width = 100 + '%';
     effectLevelProportion = (pinEffectLevel.offsetLeft / pinEffectLevel.parentNode.offsetWidth) * 100;
@@ -141,7 +141,7 @@
   };
 
   for (var i = 0; i < radioEffect.length; i++) {
-    radioEffect[i].addEventListener('change', gettingValueRadioEffect);
+    radioEffect[i].addEventListener('change', onGettingValueRadioEffect);
   }
 
   window.main.arrayImportantElements.push(textDescription);
@@ -168,7 +168,7 @@
     element.addEventListener('enter', onElementEnter);
   };
 
-  var hashtagCheck = function () {
+  var onHashtagCheck = function () {
     var masHashtag = hashtag.value.split(' ');
 
     if (hashtag.value !== '') {
@@ -188,16 +188,17 @@
     }
   };
 
-  var descriptionCheck = function () {
+  var onDescriptionCheck = function () {
     if (textDescription.value.length > 140) {
       incorrectData(textDescription, 'Не более 140 символов');
     }
   };
 
-  hashtag.addEventListener('change', hashtagCheck);
-  textDescription.addEventListener('change', descriptionCheck);
+  hashtag.addEventListener('change', onHashtagCheck);
+  textDescription.addEventListener('change', onDescriptionCheck);
 
   window.photoEditing = {
-    defaultValueEffect: defaultValueEffect
+    defaultValueEffect: defaultValueEffect,
+    pinEffectLevel: pinEffectLevel
   };
 })();

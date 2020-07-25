@@ -8,7 +8,7 @@
   var commentsLoader = containerBigPicture.querySelector('.comments-loader');
 
   var fillingBigPicture = function (photo) {
-    containerBigPicture.querySelector('.big-picture__img').getElementsByTagName('img')[0].src = photo.url;
+    containerBigPicture.querySelector('.big-picture__img').querySelector('img').src = photo.url;
     containerBigPicture.querySelector('.likes-count').textContent = photo.likes;
     containerBigPicture.querySelector('.comments-count').textContent = photo.comments.length;
     containerBigPicture.querySelector('.social__caption').textContent = photo.description;
@@ -34,9 +34,11 @@
       };
     };
 
-    commentsLoader.addEventListener('click', onCommentsLoaderClick());
+    window.main.addEventsHandler(commentsLoader, 'click', onCommentsLoaderClick());
+    window.main.addEventsHandler(commentsLoader, 'Enter', onCommentsLoaderClick());
 
-    for (var i = 0; i < photo.comments.length && i < 5; i++) {
+
+    for (var i = 0; i < Math.min(photo.comments.length, 5); i++) {
       addComment(photo.comments[i]);
     }
 
@@ -67,7 +69,7 @@
     listItem.appendChild(textComments);
   };
 
-  var makeViewPhoto = function () {
+  var addHandlerPhoto = function () {
     pictures = document.querySelectorAll('.picture');
     btnClosePopupPhoto = containerBigPicture.querySelector('.big-picture__cancel');
 
@@ -77,7 +79,7 @@
     }
   };
 
-  var open = function (picture) {
+  var openPhoto = function (picture) {
     var indexPhoto = window.backend.photos.map(function (e) {
       return e.url;
     }).indexOf(picture.querySelector('img').getAttribute('src'));
@@ -92,19 +94,24 @@
     window.main.closePopup(containerBigPicture, btnClosePopupPhoto);
   };
 
+  var defaultValueTextСomment = function () {
+    containerBigPicture.querySelector('.social__footer-text').value = '';
+  };
+
   var onPictureClick = function (evt) {
-    open(evt.currentTarget);
+    openPhoto(evt.currentTarget);
   };
 
   var onPictureEnter = function (evt) {
-    if (evt.key === 'Enter') {
-      open(evt.currentTarget);
+    if (evt.key === window.main.ENTER_KEY) {
+      openPhoto(evt.currentTarget);
     }
   };
 
   window.viewPhoto = {
     fillingBigPicture: fillingBigPicture,
     containerBigPicture: containerBigPicture,
-    makeViewPhoto: makeViewPhoto,
+    addHandlerPhoto: addHandlerPhoto,
+    defaultValueTextСomment: defaultValueTextСomment
   };
 })();

@@ -11,14 +11,15 @@
     xhr.open('POST', URL_SUBMIT, true);
     xhr.send(new FormData(form));
 
-    xhr.addEventListener('load', function () {
+    xhr.onload = function () {
       if (xhr.status === window.main.StatusCode.OK) {
         resetData();
         success();
       } else {
+        resetData();
         error();
       }
-    });
+    };
   };
 
   form.addEventListener('submit', onSendForm);
@@ -33,8 +34,12 @@
     var template = document.querySelector('#success');
     document.body.appendChild(template.content.cloneNode(true));
 
+    if (document.querySelector('.success').classList.contains('hidden')) {
+      document.querySelector('.success').remove();
+    }
+
     var popup = document.querySelector('.success');
-    window.main.closePopup(popup, popup.querySelector('.success__button'), form);
+    window.main.closePopup(popup, popup.querySelector('.success__button'));
   };
 
   var error = function () {
@@ -43,6 +48,10 @@
     window.photoEditing.defaultValueEffect();
     var template = document.querySelector('#error');
     document.body.appendChild(template.content.cloneNode(true));
+
+    if (document.querySelector('.error').classList.contains('hidden')) {
+      document.querySelector('.error').remove();
+    }
 
     var popup = document.querySelector('.error');
     window.main.closePopup(popup, popup.querySelector('.error__button'), form);

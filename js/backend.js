@@ -49,7 +49,7 @@
 
     var errorTitle = document.createElement('h2');
     errorTitle.classList.add('error__title');
-    errorTitle.innerHTML = message;
+    errorTitle.textContent = message;
 
     containerPictures.appendChild(div);
     div.appendChild(divInner);

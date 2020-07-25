@@ -9,6 +9,7 @@
   var onUploadChange = function () {
     uploadPopup.classList.remove('hidden');
     document.querySelector('body').classList.add('modal-open');
+    window.main.arrayImportantElements.push(window.photoEditing.pinEffectLevel);
 
     window.main.closePopup(uploadPopup, uploadClose, form);
   };
@@ -16,7 +17,7 @@
   uploadOpen.addEventListener('change', onUploadChange);
 
   uploadOpen.addEventListener('change', function (evt) {
-    if (evt.key === 'Enter') {
+    if (evt.key === window.main.ENTER_KEY) {
       onUploadChange();
     }
   });

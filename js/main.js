@@ -2,10 +2,29 @@
 
 (function () {
   var DEBOUNCE_INTERVAL = 500;
+  var ENTER_KEY = 'Enter';
+  var ESCAPE_KEY = 'Escape';
   var StatusCode = {
     OK: 200
   };
   var arrayImportantElements = []; // массив, в который можно поместить элементы для отслеживания, чтобы окно не закрывалось при активном состоянии элементов
+  var arrayEvents = [];
+
+  var addEventsHandler = function (el, ev, ha) {
+    arrayEvents.push({
+      element: el,
+      event: ev,
+      handler: ha
+    });
+    el.addEventListener(ev, ha);
+  };
+
+  var removeEvents = function () {
+    arrayEvents.forEach(function (item) {
+      item.element.removeEventListener(item.event, item.handler);
+    });
+    arrayEvents.length = 0;
+  };
 
   var randomInteger = function (min, max, exclusion) {
     var integer = Math.round(Math.random() * 10);
@@ -38,25 +57,16 @@
     };
   };
 
-
   var closePopup = function (popup, btnClose, form) {
     var onPopupEscPress = function (evt) {
-      var elementСheck = window.main.arrayImportantElements.map(function (e) {
-        if (e === document.activeElement) {
-          return true;
-        } else {
-          return false;
-        }
-      }).indexOf(true);
-
-      if (evt.key === 'Escape' && elementСheck === -1) {
+      if (evt.key === ESCAPE_KEY) {
         evt.preventDefault();
         closeThisPopup();
       }
     };
 
     var onPopupEnterPress = function (evt) {
-      if (evt.key === 'Enter') {
+      if (evt.key === ENTER_KEY) {
         closeThisPopup();
       }
     };
@@ -68,24 +78,37 @@
     };
 
     var closeThisPopup = function () {
-      if (form) {
-        form.reset();
-        window.photoEditing.defaultValueEffect();
+      var elementСheck = window.main.arrayImportantElements.map(function (e) {
+        if (e === document.activeElement) {
+          return true;
+        }
+        return false;
+      }).indexOf(true);
+
+      if (elementСheck === -1) {
+        if (form) {
+          form.reset();
+          window.photoEditing.defaultValueEffect();
+        }
+
+        window.viewPhoto.defaultValueTextСomment();
+
+        popup.classList.add('hidden');
+
+        btnClose.removeEventListener('click', closeThisPopup);
+        btnClose.removeEventListener('keydown', onPopupEnterPress);
+        document.removeEventListener('keydown', onPopupEscPress);
+        popup.removeEventListener('click', onOutsidePopupClick);
+        document.querySelector('body').classList.remove('modal-open');
+        removeEvents();
       }
-
-      popup.classList.add('hidden');
-
-      btnClose.removeEventListener('click', closeThisPopup);
-      document.removeEventListener('keydown', onPopupEscPress);
-      btnClose.removeEventListener('keydown', onPopupEscPress);
-      document.querySelector('body').classList.remove('modal-open');
     };
 
     btnClose.addEventListener('click', closeThisPopup);
 
     btnClose.addEventListener('keydown', onPopupEnterPress);
     document.addEventListener('keydown', onPopupEscPress);
-    document.addEventListener('click', onOutsidePopupClick);
+    popup.addEventListener('click', onOutsidePopupClick);
   };
 
   window.main = {
@@ -93,6 +116,9 @@
     arrayImportantElements: arrayImportantElements,
     closePopup: closePopup,
     debounce: debounce,
-    StatusCode: StatusCode
+    StatusCode: StatusCode,
+    ENTER_KEY: ENTER_KEY,
+    arrayEvents: arrayEvents,
+    addEventsHandler: addEventsHandler
   };
 })();
