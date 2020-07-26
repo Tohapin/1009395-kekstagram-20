@@ -1,6 +1,9 @@
 'use strict';
 
 (function () {
+  var SCALE_STEP = 25;
+  var QUANTITY_HASHTAGS = 5;
+  var QUANTITY_WORDS_DESCRIPTION = 140;
   var pinEffectLevel = document.querySelector('.effect-level__pin');
   var depthEffectLevel = document.querySelector('.effect-level__depth');
   var radioEffect = document.getElementsByName('effect');
@@ -29,11 +32,11 @@
   var onScaleControlSmallerClick = function () {
     var scaleValue = scaleControlValue.value.slice(0, -1);
 
-    if (scaleValue > 25) {
-      if ((scaleValue - 25) < 25) {
-        scaleValue = 25;
+    if (scaleValue > SCALE_STEP) {
+      if ((scaleValue - SCALE_STEP) < SCALE_STEP) {
+        scaleValue = SCALE_STEP;
       } else {
-        scaleValue -= 25;
+        scaleValue -= SCALE_STEP;
       }
     }
 
@@ -45,10 +48,10 @@
     var scaleValue = scaleControlValue.value.slice(0, -1);
 
     if (scaleValue < 100) {
-      if ((100 - scaleValue) <= 25) {
+      if ((100 - scaleValue) <= SCALE_STEP) {
         scaleValue = 100;
       } else {
-        scaleValue = parseInt(scaleValue, 10) + 25;
+        scaleValue = parseInt(scaleValue, 10) + SCALE_STEP;
       }
     }
 
@@ -138,6 +141,7 @@
     depthEffectLevel.style.width = document.querySelector('.effect-level__line').offsetWidth + 'px';
     applicationEffect('none', '');
     levelEffect.classList.add('hidden');
+    applicationScale(100);
   };
 
   for (var i = 0; i < radioEffect.length; i++) {
@@ -172,7 +176,7 @@
     var masHashtag = hashtag.value.split(' ');
 
     if (hashtag.value !== '') {
-      if (masHashtag.length <= 5) {
+      if (masHashtag.length <= QUANTITY_HASHTAGS) {
         for (var int = 0; int < masHashtag.length; int++) {
           if (!masHashtag[int].match(/^#[а-яёА-ЯË\w]{1,19}/gi)) {
             incorrectData(hashtag, 'Не корректный хэштег: ' + masHashtag[i]);
@@ -180,8 +184,8 @@
             hashtag.setCustomValidity('');
           }
         }
-      } else if (masHashtag.length > 5) {
-        incorrectData(hashtag, 'Не больше 5 тегов');
+      } else if (masHashtag.length > QUANTITY_HASHTAGS) {
+        incorrectData(hashtag, 'Не больше ' + QUANTITY_HASHTAGS + 'тегов');
       }
     } else {
       hashtag.setCustomValidity('');
@@ -189,8 +193,8 @@
   };
 
   var onDescriptionCheck = function () {
-    if (textDescription.value.length > 140) {
-      incorrectData(textDescription, 'Не более 140 символов');
+    if (textDescription.value.length > QUANTITY_WORDS_DESCRIPTION) {
+      incorrectData(textDescription, 'Не более ' + QUANTITY_WORDS_DESCRIPTION + ' символов');
     }
   };
 

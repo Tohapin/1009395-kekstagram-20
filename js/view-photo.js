@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var COMMENT_LIMIT = 5;
   var pictures = '';
   var btnClosePopupPhoto = '';
   var containerBigPicture = document.querySelector('.big-picture');
@@ -18,10 +19,10 @@
     }
 
     var onCommentsLoaderClick = function () {
-      var index = (photo.comments.length < 5) ? photo.comments.length : 5;
+      var index = (photo.comments.length < COMMENT_LIMIT) ? photo.comments.length : COMMENT_LIMIT;
 
       return function () {
-        var limit = index + 5;
+        var limit = index + COMMENT_LIMIT;
 
         while (index < photo.comments.length && index < limit) {
           addComment(photo.comments[index]);
@@ -38,11 +39,11 @@
     window.main.addEventsHandler(commentsLoader, 'Enter', onCommentsLoaderClick());
 
 
-    for (var i = 0; i < Math.min(photo.comments.length, 5); i++) {
+    for (var i = 0; i < Math.min(photo.comments.length, COMMENT_LIMIT); i++) {
       addComment(photo.comments[i]);
     }
 
-    if (photo.comments.length <= 5) {
+    if (photo.comments.length <= COMMENT_LIMIT) {
       commentsLoader.classList.add('hidden');
     }
   };

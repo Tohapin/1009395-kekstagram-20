@@ -77,15 +77,12 @@
       }
     };
 
-    var closeThisPopup = function () {
-      var elementСheck = window.main.arrayImportantElements.map(function (e) {
-        if (e === document.activeElement) {
-          return true;
-        }
-        return false;
-      }).indexOf(true);
+    var checkElement = function (e) {
+      return e === document.activeElement;
+    };
 
-      if (elementСheck === -1) {
+    var closeThisPopup = function () {
+      if (!arrayImportantElements.some(checkElement)) {
         if (form) {
           form.reset();
           window.photoEditing.defaultValueEffect();
